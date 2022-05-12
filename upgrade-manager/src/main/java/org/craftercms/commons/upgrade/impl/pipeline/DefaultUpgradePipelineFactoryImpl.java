@@ -105,6 +105,7 @@ public class DefaultUpgradePipelineFactoryImpl<T> implements UpgradePipelineFact
         this.applicationContext = applicationContext;
     }
 
+    @SuppressWarnings("rawtypes")
     protected HierarchicalConfiguration loadUpgradeConfiguration() throws UpgradeException {
         YamlConfiguration configuration = new YamlConfiguration();
         try (InputStream is = configurationFile.getInputStream()) {

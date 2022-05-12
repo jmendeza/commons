@@ -27,8 +27,6 @@ import org.springframework.beans.factory.InitializingBean;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
-import static org.apache.commons.lang3.StringUtils.isEmpty;
-
 /**
  * Converts String to Date, with a custom pattern and time zone.
  *
