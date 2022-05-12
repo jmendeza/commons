@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -36,7 +36,11 @@ public class StringToFloatConverter implements Converter<String, Float> {
 
     @Override
     public Float convert(String source) {
-        return Float.valueOf(source);
+        try {
+            return Float.valueOf(source);
+        } catch (NullPointerException | NumberFormatException e) {
+            return null;
+        }
     }
 
 }

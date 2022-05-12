@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -15,6 +15,7 @@
  */
 package org.craftercms.commons.rest;
 
+import java.beans.ConstructorProperties;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -53,6 +54,7 @@ public class HttpMessageConvertingResponseWriter {
     protected List<HttpMessageConverter<?>> messageConverters;
     protected List<MediaType> allSupportedMediaTypes;
 
+    @ConstructorProperties({"contentNegotiationManager", "messageConverters"})
     public HttpMessageConvertingResponseWriter(ContentNegotiationManager contentNegotiationManager,
                                                List<HttpMessageConverter<?>> messageConverters) {
         this.contentNegotiationManager = contentNegotiationManager;

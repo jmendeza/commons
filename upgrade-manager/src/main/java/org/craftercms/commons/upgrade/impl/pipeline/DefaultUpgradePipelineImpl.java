@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -22,6 +22,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.craftercms.commons.upgrade.UpgradeOperation;
 import org.craftercms.commons.upgrade.UpgradePipeline;
 import org.craftercms.commons.upgrade.exception.UpgradeException;
+import org.craftercms.commons.upgrade.impl.UpgradeContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StopWatch;
@@ -45,7 +46,7 @@ public class DefaultUpgradePipelineImpl<T> implements UpgradePipeline<T> {
     /**
      * Name of the pipeline.
      */
-    protected String name;
+    protected final String name;
 
     /**
      * Indicates if the pipeline should continue executing after an operation fails
@@ -55,7 +56,7 @@ public class DefaultUpgradePipelineImpl<T> implements UpgradePipeline<T> {
     /**
      * List of all upgrade operations to be executed.
      */
-    protected List<UpgradeOperation<T>> operations;
+    protected final List<UpgradeOperation<T>> operations;
 
     public void setContinueOnFailure(final boolean continueOnFailure) {
         this.continueOnFailure = continueOnFailure;
@@ -65,7 +66,7 @@ public class DefaultUpgradePipelineImpl<T> implements UpgradePipeline<T> {
      * {@inheritDoc}
      */
     @Override
-    public void execute(final T target) throws UpgradeException {
+    public void execute(final UpgradeContext<T> context) throws UpgradeException {
         if (isEmpty()) {
             logger.debug("Pipeline '{}' is empty, skipping execution", name);
             return;
@@ -78,7 +79,7 @@ public class DefaultUpgradePipelineImpl<T> implements UpgradePipeline<T> {
             logger.info("------- Starting execution of operation {} -------", operationName);
             watch.start(operationName);
             try {
-                operation.execute(target);
+                operation.execute(context);
             } catch (UpgradeException e) {
                 if (continueOnFailure) {
                     logger.error("Execution of operation {} failed", operationName, e);
@@ -93,8 +94,8 @@ public class DefaultUpgradePipelineImpl<T> implements UpgradePipeline<T> {
         logger.info("Execution of pipeline {} completed", name);
         logger.info("============================================================");
 
-        if (logger.isDebugEnabled()) {
-            logger.debug("Pipeline Duration:\n" + watch.prettyPrint());
+        if (logger.isTraceEnabled()) {
+            logger.trace("Pipeline Duration:\n" + watch.prettyPrint());
         }
     }
 

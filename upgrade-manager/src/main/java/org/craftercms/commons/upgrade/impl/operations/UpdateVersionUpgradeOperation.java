@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -17,6 +17,7 @@
 package org.craftercms.commons.upgrade.impl.operations;
 
 import org.craftercms.commons.upgrade.VersionProvider;
+import org.craftercms.commons.upgrade.impl.UpgradeContext;
 
 /**
  * Implementation of {@link org.craftercms.commons.upgrade.UpgradeOperation} that updates the current version for
@@ -31,15 +32,15 @@ public class UpdateVersionUpgradeOperation<T> extends AbstractUpgradeOperation<T
     /**
      * The version provider
      */
-    protected VersionProvider versionProvider;
+    protected VersionProvider<T> versionProvider;
 
-    public UpdateVersionUpgradeOperation(final VersionProvider versionProvider) {
+    public UpdateVersionUpgradeOperation(final VersionProvider<T> versionProvider) {
         this.versionProvider = versionProvider;
     }
 
     @Override
-    protected void doExecute(final T target) throws Exception {
-        versionProvider.setVersion(target, nextVersion);
+    protected void doExecute(final UpgradeContext<T> context) throws Exception {
+        versionProvider.setVersion(context, nextVersion);
     }
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -22,17 +22,20 @@ import java.util.List;
 import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.any;
 
 /**
  * Created by alfonsovasquez on 14/6/16.
  */
+@RunWith(MockitoJUnitRunner.class)
 public class UpdateHelperTest {
 
     public static final String EXPECTED_ID = ObjectId.get().toString();
@@ -50,8 +53,6 @@ public class UpdateHelperTest {
 
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-
         doAnswer(new Answer<Void>() {
 
             @Override
@@ -70,7 +71,7 @@ public class UpdateHelperTest {
                 return null;
             }
 
-        }).when(repository).update(anyString(), anyString(), eq(false), eq(false), anyVararg());
+        }).when(repository).update(anyString(), anyString(), eq(false), eq(false), any());
 
         updateHelper = new UpdateHelper();
     }

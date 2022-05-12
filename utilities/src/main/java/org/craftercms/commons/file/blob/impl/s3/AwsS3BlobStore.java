@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -20,7 +20,7 @@ import org.apache.commons.configuration2.HierarchicalConfiguration;
 import org.apache.commons.configuration2.tree.ImmutableNode;
 import org.craftercms.commons.aws.S3ClientCachingFactory;
 import org.craftercms.commons.config.profiles.aws.S3Profile;
-import org.craftercms.commons.file.blob.BlobStoreException;
+import org.craftercms.commons.file.blob.exception.BlobStoreException;
 import org.craftercms.commons.file.blob.impl.AbstractBlobStore;
 import org.craftercms.commons.spring.resources.S3Resource;
 import org.springframework.core.io.Resource;

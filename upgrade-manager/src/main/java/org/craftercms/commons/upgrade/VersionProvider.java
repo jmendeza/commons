@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -17,14 +17,16 @@
 package org.craftercms.commons.upgrade;
 
 import org.craftercms.commons.upgrade.exception.UpgradeException;
+import org.craftercms.commons.upgrade.impl.UpgradeContext;
 
 /**
  * Provides the current version of a specific target
  *
+ * @param <T> The target type supported
  * @author joseross
  * @since 3.1.5
  */
-public interface VersionProvider {
+public interface VersionProvider<T> {
 
     /**
      * Keyword used to retrieve the version
@@ -39,19 +41,19 @@ public interface VersionProvider {
     /**
      * Returns the current version
      *
-     * @param target the target
+     * @param context the upgrade context
      * @return version number
      * @throws UpgradeException if there is any error getting the current version
      */
-    String getVersion(Object target) throws UpgradeException;
+    String getVersion(UpgradeContext<T> context) throws UpgradeException;
 
     /**
      * Updates the current version
      *
-     * @param target  the target
+     * @param context the upgrade context
      * @param version the new version
      * @throws UpgradeException if there is any error setting the current version
      */
-    void setVersion(Object target, String version) throws UpgradeException;
+    void setVersion(UpgradeContext<T> context, String version) throws UpgradeException;
 
 }

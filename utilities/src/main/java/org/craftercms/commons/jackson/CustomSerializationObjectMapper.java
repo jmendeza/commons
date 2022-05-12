@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -19,15 +19,16 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * Extended {@link com.fasterxml.jackson.databind.ObjectMapper} that lets you provide your own
  * serializers/deserializers.
  */
-public class CustomSerializationObjectMapper extends ObjectMapper {
+public class CustomSerializationObjectMapper extends ObjectMapper implements InitializingBean {
 
     protected List<JsonSerializer<?>> serializers;
     protected Map<Class<?>, JsonDeserializer<?>> deserializers;
@@ -40,12 +41,12 @@ public class CustomSerializationObjectMapper extends ObjectMapper {
         this.deserializers = deserializers;
     }
 
-    @PostConstruct
-    public void init() {
+    public void afterPropertiesSet() {
         registerSerializationModule();
     }
 
     protected void registerSerializationModule() {
+        findAndRegisterModules();
         registerModule(JacksonUtils.createModule(serializers, deserializers));
     }
 

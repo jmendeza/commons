@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -20,6 +20,8 @@ import org.apache.commons.configuration2.tree.ImmutableNode;
 import org.craftercms.commons.config.ConfigurationException;
 import org.craftercms.commons.config.ConfigurationResolver;
 
+import java.beans.ConstructorProperties;
+
 import static org.craftercms.commons.config.ConfigUtils.*;
 
 /**
@@ -35,6 +37,7 @@ public class S3ProfileMapper extends AbstractAwsProfileMapper<S3Profile> {
     private static final String CONFIG_KEY_PREFIX = "prefix";
     private static final String CONFIG_KEY_PATH_STYLE = "pathStyleAccess";
 
+    @ConstructorProperties({"configurationResolver"})
     public S3ProfileMapper(ConfigurationResolver configurationResolver) {
         super(CONFIG_KEY_S3, configurationResolver);
     }

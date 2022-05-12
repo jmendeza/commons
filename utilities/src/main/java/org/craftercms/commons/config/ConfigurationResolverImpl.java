@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -19,6 +19,7 @@ import org.apache.commons.configuration2.HierarchicalConfiguration;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.StrSubstitutor;
 
+import java.beans.ConstructorProperties;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -55,6 +56,7 @@ public class ConfigurationResolverImpl implements ConfigurationResolver {
 
     protected EncryptionAwareConfigurationReader configurationReader;
 
+    @ConstructorProperties({"environment", "basePath", "envPath", "configurationReader"})
     public ConfigurationResolverImpl(String environment, String basePath, String envPath,
                                      EncryptionAwareConfigurationReader configurationReader) {
         this.environment = environment;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -29,18 +29,18 @@ import java.util.concurrent.TimeUnit;
  * @author Carlos Ortiz
  * @author Jose Ross
  */
-public final class StatusInfo {
+public class StatusInfo {
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_INSTANT.withZone(ZoneId.of("UTC"));
+    protected static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_INSTANT.withZone(ZoneId.of("UTC"));
 
-    private long uptime;
+    protected long uptime;
 
-    private String startup;
+    protected String startup;
 
     /**
      * Create the StatusInfo with current information.
      */
-    private StatusInfo() {
+    protected StatusInfo() {
         RuntimeMXBean runtime = ManagementFactory.getRuntimeMXBean();
         startup = FORMATTER.format(Instant.ofEpochMilli(runtime.getStartTime()));
         uptime = TimeUnit.MILLISECONDS.toSeconds(runtime.getUptime());

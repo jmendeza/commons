@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -17,6 +17,7 @@
 package org.craftercms.commons.upgrade;
 
 import org.craftercms.commons.upgrade.exception.UpgradeException;
+import org.craftercms.commons.upgrade.impl.UpgradeContext;
 
 /**
  * Groups any number of {@link UpgradeOperation} instances
@@ -30,10 +31,10 @@ public interface UpgradePipeline<T> {
     /**
      * Executes each {@link UpgradeOperation} for the given target
      *
-     * @param target the target
+     * @param context the upgrade context
      * @throws UpgradeException if any of the {@link UpgradeOperation}s fails
      */
-    void execute(T target) throws UpgradeException;
+    void execute(UpgradeContext<T> context) throws UpgradeException;
 
     /**
      * Indicates if the pipeline doesn't contain any operations

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -17,10 +17,11 @@
 package org.craftercms.commons.upgrade.impl.operations;
 
 import org.craftercms.commons.upgrade.exception.UpgradeException;
+import org.craftercms.commons.upgrade.impl.UpgradeContext;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Spy;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -53,7 +54,7 @@ public class AbstractUpgradeOperationTest {
     private static class DummyUpgradeOperation extends AbstractUpgradeOperation<Object> {
 
         @Override
-        protected void doExecute(Object target) {
+        protected void doExecute(UpgradeContext<Object> target) {
             // do nothing
         }
 

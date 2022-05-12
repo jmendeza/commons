@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -25,8 +25,8 @@ import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
  */
 public class BasicUsernamePasswordAuthConfigurator implements GitAuthenticationConfigurator {
 
-    private String username;
-    private String password;
+    private final String username;
+    private final String password;
 
     public BasicUsernamePasswordAuthConfigurator(String username, String password) {
         this.username = username;
@@ -34,7 +34,7 @@ public class BasicUsernamePasswordAuthConfigurator implements GitAuthenticationC
     }
 
     @Override
-    public void configureAuthentication(TransportCommand command) {
+    public void configureAuthentication(TransportCommand<?, ?> command) {
         command.setCredentialsProvider(new UsernamePasswordCredentialsProvider(username, password));
     }
 

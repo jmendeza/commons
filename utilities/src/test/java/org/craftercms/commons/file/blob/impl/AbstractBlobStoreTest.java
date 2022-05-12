@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -44,7 +44,7 @@ public class AbstractBlobStoreTest {
     public static final Resource CONFIG_FILE = new ClassPathResource("config/stores.xml");
 
     @InjectMocks
-    private AwsS3BlobStore store; // cant't test abstract class so use the impl
+    private AwsS3BlobStore store; // can't test abstract class so use the impl
 
     @Mock(answer = Answers.CALLS_REAL_METHODS)
     private S3ProfileMapper profileMapper;
@@ -57,7 +57,7 @@ public class AbstractBlobStoreTest {
     @Test
     public void initTest() throws IOException, org.craftercms.commons.config.ConfigurationException {
         try (InputStream is = CONFIG_FILE.getInputStream()) {
-            HierarchicalConfiguration<ImmutableNode> config = ConfigUtils.readXmlConfiguration(is, emptyMap());
+            HierarchicalConfiguration<ImmutableNode> config = ConfigUtils.readXmlConfiguration(is, ',' ,emptyMap());
 
             store.init(config.configurationsAt("blobStore").get(0));
 

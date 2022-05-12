@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -23,10 +23,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -40,7 +40,7 @@ public class UpdateVersionUpgradeOperationTest {
     public static final String FINAL_VERSION = "2.0";
 
     @Mock
-    private VersionProvider versionProvider;
+    private VersionProvider<Object> versionProvider;
 
     @InjectMocks
     private UpdateVersionUpgradeOperation<?> operation;
@@ -52,7 +52,7 @@ public class UpdateVersionUpgradeOperationTest {
 
     @Test
     public void versionShouldBeUpdated() throws UpgradeException {
-        when(versionProvider.getVersion(any())).thenReturn(INITIAL_VERSION);
+        // when(versionProvider.getVersion(any())).thenReturn(INITIAL_VERSION); // TODO Mockit fails due to unnecessary stubbing, figure out why
 
         operation.execute(null);
 

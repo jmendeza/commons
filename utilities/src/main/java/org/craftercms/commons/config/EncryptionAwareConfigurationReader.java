@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -16,6 +16,7 @@
 
 package org.craftercms.commons.config;
 
+import java.beans.ConstructorProperties;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -48,6 +49,7 @@ public class EncryptionAwareConfigurationReader {
 
     protected Map<String, Lookup> prefixLookups;
 
+    @ConstructorProperties({"textEncryptor"})
     public EncryptionAwareConfigurationReader(TextEncryptor textEncryptor) {
         this.textEncryptor = textEncryptor;
 
@@ -66,7 +68,7 @@ public class EncryptionAwareConfigurationReader {
 
     public HierarchicalConfiguration<?> readXmlConfiguration(InputStream inputStream)
         throws ConfigurationException {
-        return ConfigUtils.readXmlConfiguration(inputStream, prefixLookups);
+        return ConfigUtils.readXmlConfiguration(inputStream, ',', prefixLookups);
     }
 
     public HierarchicalConfiguration<?> readXmlConfiguration(Resource resource) throws ConfigurationException {

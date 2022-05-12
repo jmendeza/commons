@@ -1,5 +1,5 @@
     /*
-     * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+     * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
      *
      * This program is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License version 3 as published by
@@ -21,10 +21,10 @@
     import org.junit.Test;
     import org.junit.runner.RunWith;
     import org.mockito.Mock;
-    import org.mockito.runners.MockitoJUnitRunner;
+    import org.mockito.junit.MockitoJUnitRunner;
 
     import static java.util.Arrays.asList;
-    import static org.mockito.Matchers.any;
+    import static org.mockito.ArgumentMatchers.any;
     import static org.mockito.Mockito.doThrow;
     import static org.mockito.Mockito.verify;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -18,12 +18,14 @@ package org.craftercms.commons.converters.impl;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.TimeZone;
-import javax.annotation.PostConstruct;
 
 import org.apache.commons.lang3.time.FastDateFormat;
 import org.craftercms.commons.converters.Converter;
 import org.craftercms.commons.exceptions.DateParseException;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.beans.factory.InitializingBean;
+
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
@@ -32,7 +34,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  *
  * @author avasquez
  */
-public class StringToDateConverter implements Converter<String, Date> {
+public class StringToDateConverter implements Converter<String, Date>, InitializingBean {
 
     protected String datePattern;
     protected TimeZone timeZone;
@@ -47,8 +49,7 @@ public class StringToDateConverter implements Converter<String, Date> {
         this.timeZone = TimeZone.getTimeZone(timeZone);
     }
 
-    @PostConstruct
-    public void init() {
+    public void afterPropertiesSet() {
         dateFormat = FastDateFormat.getInstance(datePattern, timeZone);
     }
 

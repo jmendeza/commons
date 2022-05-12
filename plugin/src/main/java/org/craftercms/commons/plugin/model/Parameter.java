@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Parameter {
 
-    public static String NAME_REGEX = "[a-z]+([A-Z][a-z0-9]+)+";
+    public static String NAME_REGEX = "[a-z]+([A-Z][a-z0-9]+)*";
 
     /**
      * The label to display for the parameter

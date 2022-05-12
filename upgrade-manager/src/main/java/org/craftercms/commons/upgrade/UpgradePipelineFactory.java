@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -18,6 +18,7 @@ package org.craftercms.commons.upgrade;
 
 import org.craftercms.commons.config.ConfigurationException;
 import org.craftercms.commons.upgrade.exception.UpgradeException;
+import org.craftercms.commons.upgrade.impl.UpgradeContext;
 
 /**
  * Builds an {@link UpgradePipeline} with all the required operations
@@ -32,14 +33,16 @@ public interface UpgradePipelineFactory<T> {
     String CONFIG_KEY_NEXT_VERSION = "nextVersion";
     String CONFIG_KEY_OPERATIONS = "operations";
     String CONFIG_KEY_TYPE = "type";
+    String CONFIG_KEY_REQUIRES = ".requires";
+    String CONFIG_KEY_VERSIONS = ".versions";
 
     /**
      * Retrieves the needed upgrade operations for the given target
      *
-     * @param target the target
+     * @param context the upgrade context
      * @return the upgrade pipeline
      * @throws UpgradeException if there is any error retrieving the operations
      */
-    UpgradePipeline<T> getPipeline(T target) throws UpgradeException, ConfigurationException;
+    UpgradePipeline<T> getPipeline(UpgradeContext<T> context) throws UpgradeException, ConfigurationException;
 
 }

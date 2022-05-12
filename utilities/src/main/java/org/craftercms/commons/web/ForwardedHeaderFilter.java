@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -15,8 +15,8 @@
  */
 package org.craftercms.commons.web;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import java.beans.ConstructorProperties;
 
 /**
  * Extension of {@link org.springframework.web.filter.ForwardedHeaderFilter} that can be disabled via configuration
@@ -28,12 +28,13 @@ public class ForwardedHeaderFilter extends org.springframework.web.filter.Forwar
 
     protected boolean enabled;
 
+    @ConstructorProperties({"enabled"})
     public ForwardedHeaderFilter(boolean enabled) {
         this.enabled = enabled;
     }
 
     @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+    protected boolean shouldNotFilter(HttpServletRequest request) {
         return !enabled || super.shouldNotFilter(request);
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -60,7 +60,7 @@ public abstract class AbstractUpgradeManager<T> implements UpgradeManager<T>, Ap
     public void upgrade(final T target) throws UpgradeException {
         logger.info("Starting upgrade for target '{}'", target);
         try {
-            doUpgrade(target);
+            doUpgrade(createUpgradeContext(target));
         } catch (Exception e) {
             UpgradeException ex = new UpgradeException("Error during upgrade for target " + target, e);
             if (!continueOnFailure) {
@@ -75,7 +75,7 @@ public abstract class AbstractUpgradeManager<T> implements UpgradeManager<T>, Ap
 
     @Override
     public void upgrade() throws UpgradeException {
-        logger.info("Starting system upgrade");
+        logger.info("Starting upgrade of all targets");
         List<T> targets = getTargets();
         for (T target : targets) {
             upgrade(target);
@@ -94,12 +94,14 @@ public abstract class AbstractUpgradeManager<T> implements UpgradeManager<T>, Ap
 
     protected abstract List<T> doGetTargets() throws Exception;
 
-    protected abstract void doUpgrade(T target) throws Exception;
+    protected abstract UpgradeContext<T> createUpgradeContext(T target);
 
-    protected void executePipeline(T target, UpgradePipelineFactory<T> pipelineFactory)
+    protected abstract void doUpgrade(UpgradeContext<T> context) throws Exception;
+
+    protected void executePipeline(UpgradeContext<T> context, UpgradePipelineFactory<T> pipelineFactory)
             throws ConfigurationException, UpgradeException {
-        UpgradePipeline<T> pipeline = pipelineFactory.getPipeline(target);
-        pipeline.execute(target);
+        UpgradePipeline<T> pipeline = pipelineFactory.getPipeline(context);
+        pipeline.execute(context);
     }
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2022 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -31,10 +31,11 @@ import org.yaml.snakeyaml.representer.Representer;
 /**
  * Implementation of {@link org.craftercms.commons.upgrade.VersionProvider} that handles YAML files
  *
+ * @param <T> The target type supported
  * @author joseross
  * @since 3.1.5
  */
-public class YamlFileVersionProvider extends AbstractFileVersionProvider {
+public class YamlFileVersionProvider<T> extends AbstractFileVersionProvider<T> {
 
     protected final Yaml yaml;
 
